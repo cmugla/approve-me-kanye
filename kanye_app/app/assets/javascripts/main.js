@@ -84,17 +84,34 @@ $(document).ready(()=>{
       $img.attr('src', reallyApproves[rando])
     }
 
+    const $author = $('<input type="text" name="author" placeholder="Your Name">')
     const $button = $('<button>').text("ARCHIVE ME!")
 
-    $div.append($button)
+    $div.append($author, $button)
+
     $button.click(saveToDB)
   }
 
   function saveToDB(e){
     console.log("saved")
 
-    let text = $('#words').val()
-    console.log(text)
+    let content = $('#words').val()
+    let author  = $('input[name="author"]').val()
+
+    if(!author){
+      author = "Anonymous"
+    }
+
+    let data = {
+      content: content,
+      author: author
+    }
+
+    console.log(content, author)
+    $.post('/lyrics', data)
+      .done(data=>{
+        console.log(data)
+      })
   }
 
 });
