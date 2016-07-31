@@ -22,3 +22,5 @@
 ## Special thanks
 
   - This <a href="http://jsfiddle.net/zNHJW/3/" target="_blank">fiddle</a> for parsing punctuation out of text
+  - <a href="http://giphy.com/search/kanye-west" target="_blank">Giphy</a> for the amazing Kanye West gifs
+  - <a href="http://www.brainyquote.com/quotes/authors/k/kanye_west.html" target="_blank">Brainy Quote</a> for some amazing Kanye West quotes
