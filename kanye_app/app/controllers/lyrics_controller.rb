@@ -1,8 +1,40 @@
 class LyricsController < ApplicationController
 
+  def index
+    @lyric = Lyric.all
+    render :json => @lyric
+  end
+
+  def show
+    @lyric = Lyric.find(params[:id])
+    render :json => @lyric
+  end
+
   def create
-    author  = params[:author]
-    content = params[:content]
+    @lyric = Lyric.create({
+      :author => params[:author],
+      :content => params[:content]
+      })
+    render :json => @lyric
+  end
+
+  def update
+    @lyric = Lyric.find(params[:id])
+    @lyric.update({
+      :author => params[:author],
+      :content => params[:content]
+      })
+    render :json => @lyric
+  end
+
+  def destroy
+    @lyric = Lyric.find(params[:id])
+    if @lyric
+      @lyric.destroy
+      render :json => {:deleted => true} if @lyric
+    else
+      render :json => {:deleted => false}
+    end
   end
 
 end
