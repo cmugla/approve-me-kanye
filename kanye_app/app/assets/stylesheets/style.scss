@@ -1,0 +1,73 @@
+/* COLORS */
+$color-red: crimson;
+$color-blue: slateblue;
+
+/* IMAGES */
+$bg-img: 'http://www.bet.com/topics/k/kanye-west/_jcr_content/image.heroimage.dimg/__1410483944165/2011-topic-music-kanye-west-1.jpg';
+
+body {
+  width:100vw;
+  padding:2em;
+  font-family: sans-serif;
+  color: #333;
+  line-height: 1.5;
+  background-image: url($bg-img);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+button {
+  border-radius: 5px;
+  border: 0;
+  background-color: $color-blue;
+  padding:1em 2em;
+  color:white;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-red;
+  }
+}
+
+blockquote {
+  display: block;
+  margin: 1em 0;
+}
+
+cite {
+  display: block;
+  text-align: right;
+}
+
+#feed {
+  position:absolute;
+  right: 0;
+  top: 0;
+  width: 30%;
+  background-color: white;
+  border-left: solid 0.5em #333;
+  padding:0 40px;
+}
+
+#feed-tab {
+  background-color: #333;
+  width:40px;
+  height:100px;
+  text-align: center;
+  position:relative;
+  top:40px;
+  left:0;
+  margin-left:-80px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color:white;
+  & p {
+    transform:rotate(90deg);
+    padding-left:1.8em;
+  }
+}
