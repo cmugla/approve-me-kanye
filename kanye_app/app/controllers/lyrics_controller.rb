@@ -28,13 +28,9 @@ class LyricsController < ApplicationController
   end
 
   def destroy
-    @lyric = Lyric.find(params[:id])
-    if @lyric
-      @lyric.destroy
-      render :json => {:deleted => true} if @lyric
-    else
-      render :json => {:deleted => false}
-    end
+    lyric = Lyric.find(params[:id])
+    lyric.destroy
+    render :json => true
   end
 
 end

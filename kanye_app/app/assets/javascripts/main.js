@@ -1,10 +1,6 @@
 $(document).ready(()=>{
   console.log("we here")
 
-  let $button = $('input[name="approve"]')
-  $button.click(parseInput)
-  getSavedLyrics();
-
   function parseInput(e){
     e.preventDefault()
 
@@ -110,10 +106,10 @@ $(document).ready(()=>{
     let author  = $('input[name="author"]').val()
 
     if(!author){
-      author = "Anonymous"
+      author    = "Anonymous"
     }
 
-    let data = {
+    let data    = {
       content: content,
       author: author
     }
@@ -127,33 +123,50 @@ $(document).ready(()=>{
     $('#approval h1').empty();
     $('#approval img').attr('src', '');
     $('input[name="save"]').remove();
+
+    getSavedLyrics();
   }
 
   function getSavedLyrics(){
     $.get('/lyrics')
       .done(data=>{
-        appendSavedLyrics(data)
+        data.forEach(appendSavedLyrics)
       })
   }
 
-  function appendSavedLyrics(data){
+  function appendSavedLyrics(lyric){
+    let $li         = $('<li>')
+    let $blockquote = $('<blockquote>')
+      let $q        = $('<q>')
+      let $cite     = $('<cite>')
+    let $button     = $('<button id="delete">')
 
-    data.forEach((lyric)=>{
-      console.log(lyric)
+    let author      = lyric.author
+    let content     = lyric.content
 
-      let $li         = $('<li>')
-      let $blockquote = $('<blockquote>')
-        let $q        = $('<q>')
-        let $cite     = $('<cite>')
-      let author  = lyric.author
-      let content = lyric.content
+    $li.attr("id", lyric.id)
+    $q.text(content)
+    $cite.text(author)
 
-      $li.attr("id", lyric.id)
-      $q.text(content)
-      $cite.text(author)
+    $('#saved').prepend($li.append($blockquote.append($q,$cite), $button.text("Delete")))
+    $('button#delete').click(deleteLyric);
+  }
 
-      $('#saved').append($li.append($blockquote.append($q,$cite)))
+  function deleteLyric(e){
+    let id = $(e.target).parent().attr("id")
+    let url = '/lyrics/'+id
+    $.ajax({
+      url: url,
+      method: 'delete'
+    }).done(()=>{
+      console.log("deleted")
+      $(e.target).parent().remove()
     })
   }
+
+  let $button = $('input[name="approve"]')
+  $button.click(parseInput)
+  getSavedLyrics();
+
 
 });
