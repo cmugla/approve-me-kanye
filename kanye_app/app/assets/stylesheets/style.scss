@@ -49,6 +49,15 @@ input[type="submit"] {
   background-color: black;
 }
 
+input, textarea {
+  padding:1em;
+  margin:0.5em 0;
+  border-color: #ccc;
+  &[placeholder] {
+    font-style: italic;
+  }
+}
+
 blockquote {
   margin: 1em 0 0.5em 0;
   clear:both;
