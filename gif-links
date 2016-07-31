@@ -1,0 +1,27 @@
+"aww hell nah"          http://i.giphy.com/Rt0vHXcmEbnMs.gif
+"nope"                  http://i.giphy.com/l41Ym7ql1UKk58KC4.gif
+stare                   http://i.giphy.com/3o7qDNPLv6X3wkVWus.gif
+"aint got the answers"  http://i.giphy.com/PaPvxVB5dD6py.gif
+head nodding            http://i.giphy.com/xTeVhuOj0btgm0wwIo.gif
+
+hugging Tswift          http://i.giphy.com/3oEdvas1xzyLAuPGjS.gif
+"okokokokok"            http://i.giphy.com/xT8qBd1anoT13q5dF6.gif
+
+"clapping"              http://i.giphy.com/e4zET7MOiX9ug.gif
+"kanye approves"        http://i.giphy.com/u7hjTwuewz3Gw.gif
+smiling                 http://i.giphy.com/xTcnSNxfOFmfCCUTPG.gif
+"wow awesome"           http://i.giphy.com/5fMlYckytHM4g.gif
+stare love              http://i.giphy.com/26FxIJDQU6KcJcMEw.gif
+
+really-approves: ['http://i.giphy.com/e4zET7MOiX9ug.gif',
+  'http://i.giphy.com/u7hjTwuewz3Gw.gif',
+  'http://i.giphy.com/xTcnSNxfOFmfCCUTPG.gif',
+  'http://i.giphy.com/5fMlYckytHM4g.gif',
+  'http://i.giphy.com/26FxIJDQU6KcJcMEw.gif']
+kinda-approves: ['http://i.giphy.com/3oEdvas1xzyLAuPGjS.gif',
+  'http://i.giphy.com/xT8qBd1anoT13q5dF6.gif']
+nope: ['http://i.giphy.com/Rt0vHXcmEbnMs.gif',
+  'http://i.giphy.com/l41Ym7ql1UKk58KC4.gif',
+  'http://i.giphy.com/3o7qDNPLv6X3wkVWus.gif',
+  'http://i.giphy.com/PaPvxVB5dD6py.gif',
+  'http://i.giphy.com/xTeVhuOj0btgm0wwIo.gif']

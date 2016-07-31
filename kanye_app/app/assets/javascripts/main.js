@@ -15,16 +15,14 @@ $(document).ready(()=>{
   }
 
   function checkWithKanye(arrWords){
-    let score = 0;
 
     $.get('/words')
       .done(data=>{
-        // var arr = Object.keys( data ).map(function ( key ) { return data[key]; });
-        // console.log(arr)
-        // var max = Math.max.apply( null, arr );
-        // console.log("max", max)
+        let score = 0;
         arrWords.forEach(word=>{
-          if(data[word] && word != 'the') {
+          console.log("word: "+word)
+          console.log("score: "+data[word])
+          if(word && data[word] && word != 'the') {
             score += data[word]
           }
         })
@@ -37,6 +35,7 @@ $(document).ready(()=>{
 
     let $div    = $('#approval')
     let $h1     = $('#approval h1')
+    let $h2     = $('#approval h2')
     let $img    = $('#approval img')
 
     const reallyApproves = ['http://i.giphy.com/e4zET7MOiX9ug.gif',
@@ -47,11 +46,10 @@ $(document).ready(()=>{
     const kindaApproves= ['http://i.giphy.com/3oEdvas1xzyLAuPGjS.gif',
       'http://i.giphy.com/xT8qBd1anoT13q5dF6.gif',
       'http://i.giphy.com/3oEjHIxD6j01Q8ZWbm.gif']
-    const nope= ['http://i.giphy.com/Rt0vHXcmEbnMs.gif',
+    const nope= ['http://i.giphy.com/12h4pgk1SRtLuo.gif',
       'http://i.giphy.com/l41Ym7ql1UKk58KC4.gif',
       'http://i.giphy.com/3o7qDNPLv6X3wkVWus.gif',
-      'http://i.giphy.com/PaPvxVB5dD6py.gif',
-      'http://i.giphy.com/xTeVhuOj0btgm0wwIo.gif']
+      'http://i.giphy.com/PaPvxVB5dD6py.gif']
 
     const quotes = ["Keep your nose out the sky, keep your heart to god, and keep your face to the raising sun.",
       "Creative output, you know, is just pain. I'm going to be cliche for a minute and say that great art comes from pain.",
@@ -67,36 +65,41 @@ $(document).ready(()=>{
     let reallyRando = Math.floor(Math.random()*reallyApproves.length)
     let quotesRando = Math.floor(Math.random()*quotes.length)
 
-    if(score === 0) {
-      $h1.text("NOTHING! Zero. " + quotes[quotesRando])
-      $img.attr('src', nope[nopeRando])
-    } else if(score<30000){
-      if(score<10000){
-        $h1.text("Nope. " + quotes[quotesRando])
-      } else if (score<20000){
-        $h1.text("Nope. " + quotes[quotesRando])
-      } else {
-        $h1.text("Nah. " + quotes[quotesRando])
-      }
-      $img.attr('src', nope[nopeRando])
-    } else if(score<92000){
-      if(score<50000){
-        $h1.text("Hmm.. " + quotes[quotesRando])
-      } else if (score<70000){
-        $h1.text("OKOK.. " + quotes[quotesRando])
-      } else {
-        $h1.text("ALRIGHT ALRIGHT I like it " + quotes[quotesRando])
-      }
-      $img.attr('src', kindaApproves[kindaRando])
-    } else {
-      $h1.text("wow, nice")
-      $img.attr('src', reallyApproves[reallyRando])
+    if(score){
+      console.log(rating)
+      $h1.text("You scored a " + rating + "!")
     }
 
-    let $button = $('<input type="submit" name="save" value="ARCHIVE THIS!">')
+    if(!score) {
+      $h2.text("NOTHING! Zero. " + quotes[quotesRando])
+      $('#container').css({'background-image': 'url('+nope[nopeRando]+')', 'color':'white'})
+    } else if(score<30000){
+      if(score<10000){
+        $h2.text("Still nope. " + quotes[quotesRando])
+      } else if (score<20000){
+        $h2.text("Still nope. " + quotes[quotesRando])
+      } else {
+        $h2.text("Nah. " + quotes[quotesRando])
+      }
+      $('#container').css({'background-image': 'url('+nope[nopeRando]+')', 'color':'white'})
+    } else if(score<92000){
+      if(score<50000){
+        $h2.text("Hmm.. " + quotes[quotesRando])
+      } else if (score<70000){
+        $h2.text("OKOK.. " + quotes[quotesRando])
+      } else {
+        $h2.text("ALRIGHT ALRIGHT I like it " + quotes[quotesRando])
+      }
+      $('#container').css({'background-image': 'url('+kindaApproves[kindaRando]+')', 'color':'white'})
+    } else {
+      $h2.text("wow, nice")
+      $('#container').css({'background-image': 'url('+reallyApproves[reallyRando]+')', 'color':'white'})
+    }
+
+    let $saveBtn = $('<input type="submit" name="save" value="SAVE THE LYRIC!">')
     let $form = $('form')
-    $form.append($button)
-    $button.click(saveToDB)
+    $form.append($saveBtn)
+    $saveBtn.click(saveToDB)
   }
 
   function saveToDB(e){
@@ -117,14 +120,14 @@ $(document).ready(()=>{
     $.post('/lyrics', data)
       .done(data=>{
         console.log(data)
+        appendSavedLyrics(data);
       })
 
     $('form').get(0).reset();
     $('#approval h1').empty();
+    $('#approval h2').empty();
     $('#approval img').attr('src', '');
     $('input[name="save"]').remove();
-
-    getSavedLyrics();
   }
 
   function getSavedLyrics(){
@@ -139,7 +142,7 @@ $(document).ready(()=>{
     let $blockquote = $('<blockquote>')
       let $q        = $('<q>')
       let $cite     = $('<cite>')
-    let $button     = $('<button id="delete">')
+    let $dltBtn     = $('<button id="delete">')
 
     let author      = lyric.author
     let content     = lyric.content
@@ -148,7 +151,7 @@ $(document).ready(()=>{
     $q.text(content)
     $cite.text(author)
 
-    $('#saved').prepend($li.append($blockquote.append($q,$cite), $button.text("Delete")))
+    $('#saved').prepend($li.append($blockquote.append($q,$cite), $dltBtn.text("Delete")))
     $('button#delete').click(deleteLyric);
   }
 
@@ -159,7 +162,7 @@ $(document).ready(()=>{
       url: url,
       method: 'delete'
     }).done(()=>{
-      console.log("deleted")
+      console.log(arguments)
       $(e.target).parent().remove()
     })
   }
