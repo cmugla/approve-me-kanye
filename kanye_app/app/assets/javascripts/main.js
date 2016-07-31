@@ -3,6 +3,7 @@ $(document).ready(()=>{
 
   let $button = $('input[name="approve"]')
   $button.click(parseInput)
+  getSavedLyrics();
 
   function parseInput(e){
     e.preventDefault()
@@ -126,6 +127,33 @@ $(document).ready(()=>{
     $('#approval h1').empty();
     $('#approval img').attr('src', '');
     $('input[name="save"]').remove();
+  }
+
+  function getSavedLyrics(){
+    $.get('/lyrics')
+      .done(data=>{
+        appendSavedLyrics(data)
+      })
+  }
+
+  function appendSavedLyrics(data){
+
+    data.forEach((lyric)=>{
+      console.log(lyric)
+
+      let $li         = $('<li>')
+      let $blockquote = $('<blockquote>')
+        let $q        = $('<q>')
+        let $cite     = $('<cite>')
+      let author  = lyric.author
+      let content = lyric.content
+
+      $li.attr("id", lyric.id)
+      $q.text(content)
+      $cite.text(author)
+
+      $('#saved').append($li.append($blockquote.append($q,$cite)))
+    })
   }
 
 });
