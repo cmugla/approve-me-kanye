@@ -164,9 +164,19 @@ $(document).ready(()=>{
     })
   }
 
+  function showFeed(e){
+    $('#feed').toggleClass('show');;
+    $('aside').toggle()
+    $('#feed-tab').toggleClass('stick-out');
+  }
+
   let $button = $('input[name="approve"]')
   $button.click(parseInput)
   getSavedLyrics();
 
+  let $aside = $('aside')
+  $aside.hide();
+  let $feedTab = $('#feed-tab')
+  $feedTab.click(showFeed)
 
 });

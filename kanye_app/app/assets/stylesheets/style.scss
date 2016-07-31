@@ -48,10 +48,8 @@ cite {
   position:absolute;
   right: 0;
   top: 0;
-  width: 30%;
   background-color: white;
-  border-left: solid 0.5em #333;
-  padding:0 40px;
+  height: auto;
 }
 
 #feed-tab {
@@ -62,12 +60,26 @@ cite {
   position:relative;
   top:40px;
   left:0;
-  margin-left:-80px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   color:white;
+  cursor: pointer;
   & p {
     transform:rotate(90deg);
     padding-left:1.8em;
   }
+}
+
+.show {
+  width: 30%;
+  padding:0 40px;
+  border-left: solid 0.5em #333;
+}
+
+.stick {
+  margin-left: -40px;
+}
+
+#feed-tab.stick.stick-out{
+  margin-left:-80px;
 }
