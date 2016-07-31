@@ -1,15 +1,14 @@
 $(document).ready(()=>{
   console.log("we here")
 
-  let $form = $('form')
-
-  $form.submit(parseInput)
+  let $button = $('input[name="approve"]')
+  $button.click(parseInput)
 
   function parseInput(e){
     e.preventDefault()
 
     let words = $('textarea').val().toLowerCase()
-    /* Thanks to http://jsfiddle.net/zNHJW/3/ for parse through string and take out punctuation */
+    /* Thanks to http://jsfiddle.net/zNHJW/3/ to parse through string and take out punctuation */
     let arrWords = words.replace(/[^\w\s]|_/g, function ($1) { return ' ' + $1 + ' ';}).replace(/[ ]+/g, ' ').split(' ');
 
     checkWithKanye(arrWords)
@@ -84,16 +83,14 @@ $(document).ready(()=>{
       $img.attr('src', reallyApproves[rando])
     }
 
-    const $author = $('<input type="text" name="author" placeholder="Your Name">')
-    const $button = $('<button>').text("ARCHIVE ME!")
-
-    $div.append($author, $button)
-
+    let $button = $('<input type="submit" name="save" value="ARCHIVE THIS!">')
+    let $form = $('form')
+    $form.append($button)
     $button.click(saveToDB)
   }
 
   function saveToDB(e){
-    console.log("saved")
+    e.preventDefault()
 
     let content = $('#words').val()
     let author  = $('input[name="author"]').val()
@@ -107,11 +104,15 @@ $(document).ready(()=>{
       author: author
     }
 
-    console.log(content, author)
     $.post('/lyrics', data)
       .done(data=>{
         console.log(data)
       })
+
+    $('form').get(0).reset();
+    $('#approval h1').empty();
+    $('#approval img').attr('src', '');
+    $('input[name="save"]').remove();
   }
 
 });
