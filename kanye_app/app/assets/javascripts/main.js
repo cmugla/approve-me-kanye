@@ -7,6 +7,9 @@ $(document).ready(()=>{
   function parseInput(e){
     e.preventDefault()
 
+    let $saveBtn = $('input[name="save"]')
+    $saveBtn.remove()
+
     let words = $('textarea').val().toLowerCase()
     /* Thanks to http://jsfiddle.net/zNHJW/3/ to parse through string and take out punctuation */
     let arrWords = words.replace(/[^\w\s]|_/g, function ($1) { return ' ' + $1 + ' ';}).replace(/[ ]+/g, ' ').split(' ');
@@ -53,34 +56,44 @@ $(document).ready(()=>{
       'http://i.giphy.com/PaPvxVB5dD6py.gif',
       'http://i.giphy.com/xTeVhuOj0btgm0wwIo.gif']
 
+    const quotes = ["Keep your nose out the sky, keep your heart to god, and keep your face to the raising sun.",
+      "Creative output, you know, is just pain. I'm going to be cliche for a minute and say that great art comes from pain.",
+      "I liberate minds with my music. That's more important than liberating a few people from apartheid or whatever",
+      "I really appreciate the moments that I was able to win rap album of the year or whatever.",
+      "My message isn't perfectly defined. I have, as a human being, fallen to peer pressure.",
+      "I will go down as the voice of this generation, of this decade, I will be the loudest voice.",
+      "I feel like I'm too busy writing history to read it.",
+      "Know your worth! People always act like they're doing more for you than you're doing for them."]
+
+    let nopeRando   = Math.floor(Math.random()*nope.length)
+    let kindaRando  = Math.floor(Math.random()*kindaApproves.length)
+    let reallyRando = Math.floor(Math.random()*reallyApproves.length)
+    let quotesRando = Math.floor(Math.random()*quotes.length)
+
     if(score === 0) {
-      $h1.text("NOTHING! Zero. Creative output, you know, is just pain. I'm going to be cliche for a minute and say that great art comes from pain.")
-      let rando=Math.floor(Math.random()*nope.length)
-      $img.attr('src', nope[rando])
+      $h1.text("NOTHING! Zero. " + quotes[quotesRando])
+      $img.attr('src', nope[nopeRando])
     } else if(score<30000){
       if(score<10000){
-        $h1.text("Nope. I liberate minds with my music. That's more important than liberating a few people from apartheid or whatever")
+        $h1.text("Nope. " + quotes[quotesRando])
       } else if (score<20000){
-        $h1.text("Nope. I really appreciate the moments that I was able to win rap album of the year or whatever.")
+        $h1.text("Nope. " + quotes[quotesRando])
       } else {
-        $h1.text("Nah. My message isn't perfectly defined. I have, as a human being, fallen to peer pressure.")
+        $h1.text("Nah. " + quotes[quotesRando])
       }
-      let rando=Math.floor(Math.random()*nope.length)
-      $img.attr('src', nope[rando])
+      $img.attr('src', nope[nopeRando])
     } else if(score<92000){
       if(score<50000){
-        $h1.text("I will go down as the voice of this generation, of this decade, I will be the loudest voice.")
+        $h1.text("Hmm.. " + quotes[quotesRando])
       } else if (score<70000){
-        $h1.text("I feel like I'm too busy writing history to read it.")
+        $h1.text("OKOK.. " + quotes[quotesRando])
       } else {
-        $h1.text("Know your worth! People always act like they're doing more for you than you're doing for them.")
+        $h1.text("ALRIGHT ALRIGHT I like it " + quotes[quotesRando])
       }
-      let rando=Math.floor(Math.random()*kindaApproves.length)
-      $img.attr('src', kindaApproves[rando])
+      $img.attr('src', kindaApproves[kindaRando])
     } else {
       $h1.text("wow, nice")
-      let rando=Math.floor(Math.random()*reallyApproves.length)
-      $img.attr('src', reallyApproves[rando])
+      $img.attr('src', reallyApproves[reallyRando])
     }
 
     let $button = $('<input type="submit" name="save" value="ARCHIVE THIS!">')
