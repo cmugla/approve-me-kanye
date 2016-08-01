@@ -79,7 +79,7 @@ cite {
 #feed-tab {
   background-color: #333;
   width:40px;
-  height:100px;
+  height:120px;
   text-align: center;
   position:relative;
   top:40px;
@@ -88,6 +88,8 @@ cite {
   border-bottom-left-radius: 5px;
   color:white;
   cursor: pointer;
+  animation: grow 1s infinite;
+  overflow:hidden;
   & p {
     transform:rotate(90deg);
     padding-left:1.8em;
@@ -106,6 +108,7 @@ cite {
 
 #feed-tab.stick.stick-out{
   margin-left:-80px;
+  animation:none;
 }
 
 #approval {
@@ -132,4 +135,10 @@ cite {
   background-repeat: no-repeat;
   width: 100%;
   height: 100vh;
+}
+
+@keyframes grow {
+  0% { width: 40px; }
+  50% { width: 50px; }
+  100% { width: 40px; }
 }

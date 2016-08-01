@@ -15,7 +15,7 @@ $(document).ready(()=>{
   }
 
   function checkWithKanye(arrWords){
-
+    console.log(arrWords)
     $.get('/words')
       .done(data=>{
         let score = 0;
