@@ -3,6 +3,8 @@
   A comparison app of a user's lyrical work and Kanye West's. 
   
   Ever wondered if you and Kanye gravitated towards the same words in your work? Well, now you can check. Based on a sample piece of writing you input, the app breaks down your work and compares each word with how many times Kanye has used that word in his lyrics. Thus, you are given a response of approval or a simple "nope" depending on how well you score. As we all know, he is a bit self-centered, so most of the disapproving responses tend to be less about your lyrics and more about him and his views about life.
+  
+  [Check it out](https://like-it-kanye.herokuapp.com/)
 
 ## User Stories
 
